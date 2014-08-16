@@ -11,11 +11,23 @@ for p in posts
     p.comments = {}
     p.comments.data = []
 
+  # Check if there's a link that's not in the post message.
+  articles = []
+  if p.link
+    # There was no message, just a link.
+    unless p.message?
+      articles.push {url: p.link}
+    # There was a link added that was then deleted from the post message.
+    if p.message?
+      unless p.message.indexOf(p.link) > -1
+        articles.push {url: p.link}
+
   p.comments.data.unshift {
     from:
       name: p.from.name
     created_time: p.created_time
     message: p.message
+    articles: articles
   }
 
   for comment in p.comments.data
@@ -24,6 +36,14 @@ for p in posts
     if comment.message?
       #console.log comment.message.match(regex)
       articles = comment.message.match(regex)?.map (url) -> {url: url}
+
+      # Combined post link articles with possible additional ones found in the
+      # post message.
+      if comment.articles?.length > 0 and articles?
+        articles = comment.articles.concat articles
+      else if comment.articles?.length > 0
+        articles = comment.articles
+
     comments.push {
       author: comment.from.name
       created_at: comment.created_time
