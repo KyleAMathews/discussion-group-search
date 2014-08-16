@@ -52,6 +52,7 @@ for p in posts
     }
 
   mungedPosts.push {
+    id: p.id
     author: p.from.name
     created_at: p.created_time
     comments: comments
