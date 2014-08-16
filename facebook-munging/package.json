@@ -1,0 +1,15 @@
+{
+  "name": "facebook-munging",
+  "version": "1.0.0",
+  "description": "Take posts exported through the Facebook API and munge them to our desired format",
+  "main": "index.coffee",
+  "dependencies": {
+    "findall": "^0.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "license": "MIT"
+}
